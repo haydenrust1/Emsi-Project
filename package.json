@@ -23,7 +23,13 @@
     "url": "https://github.com/haydenrust1/Emsi-Project/issues"
   },
   "homepage": "https://github.com/haydenrust1/Emsi-Project#readme",
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.7"
+  },
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.21.1",
+    "express": "^4.16.3",
+    "if-env": "^1.0.4"
   }
 }

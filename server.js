@@ -18,5 +18,5 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 app.listen(PORT, function() {
-    console.log(`API Server listening on Port ${PORT}`)
+    console.log(`API Server listening at http://localhost:${PORT}`)
 });
