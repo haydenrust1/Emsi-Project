@@ -18,9 +18,33 @@ function Home() {
     }
 
     return(
-        <>
-        <h1>hello!</h1>
-        </>
+        
+        <div className='container'>
+            {/* occupation and location */}
+            <div className='row'>
+                <div className='col'>
+                    <h1>{data.occupation.title} in {data.region.title}</h1>
+                </div>
+            </div>
+            {/* Summary */}
+            <div className='row'>
+                <div className='col'>
+                    <h1>{data.occupation.title} in {data.region.title}</h1>
+                </div>
+            </div>
+            {/* Regional Trends: graph */}
+            <div className='row'>
+                <div className='col'>
+                    <h1>{data.occupation.title} in {data.region.title}</h1>
+                </div>
+            </div>
+            {/* Industries employing occupation */}
+            <div className='row'>
+                <div className='col'>
+                    <h1>{data.occupation.title} in {data.region.title}</h1>
+                </div>
+            </div>
+        </div>
     )
 }
 
