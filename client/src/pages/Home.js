@@ -1,5 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import API from '../utilities/API'
+import Title from '../components/Title'
+import Summary from '../components/Summary'
+import JobAmount from '../components/JobAmount';
+import Trends from '../components/Trends';
+import IndustryDesire from '../components/employedInfo';
 
 function Home() {
     const [data, setData] = useState();
@@ -8,43 +13,31 @@ function Home() {
         loadData();
     }, [])
 
-    function loadData() {
-        API.getJobData()
-        .then(res => {
-            console.log(res.data);
-            setData(res.data);
-        })
-        .catch(error => console.log(error))
+     async function loadData() {
+        try{
+            let jobData = await API.getJobData()
+            console.log(jobData);
+            setData(jobData.data);
+        }catch(error) {
+            console.log(error)
+        }
     }
 
     return(
-        
         <div className='container'>
             {/* occupation and location */}
-            <div className='row'>
-                <div className='col'>
-                    <h1>{data.occupation.title} in {data.region.title}</h1>
-                </div>
-            </div>
+            <Title title={data}/>
             {/* Summary */}
-            <div className='row'>
-                <div className='col'>
-                    <h1>{data.occupation.title} in {data.region.title}</h1>
-                </div>
-            </div>
-            {/* Regional Trends: graph */}
-            <div className='row'>
-                <div className='col'>
-                    <h1>{data.occupation.title} in {data.region.title}</h1>
-                </div>
-            </div>
+            <Summary summary={data}/>
+            {/* number of jobs */}
+            <JobAmount amount={data}/>
+            {/* Regional Trends with graph */}
+            <Trends trends={data}/>
             {/* Industries employing occupation */}
-            <div className='row'>
-                <div className='col'>
-                    <h1>{data.occupation.title} in {data.region.title}</h1>
-                </div>
-            </div>
+            <IndustryDesire info={data}/>
         </div>
+        // <p>h</p>
+
     )
 }
 

@@ -1,12 +1,12 @@
 import React from 'react'
 import Jumbotron from '../Jumbotron'
 
-function Header(props) {
+function Header() {
     return(
         <nav>
             <Jumbotron>
-                <h1 class="display-4">Occupation Overview</h1>
-                <hr class="my-4"></hr>
+                <h1 className="display-4">Occupation Overview</h1>
+                <hr className="my-4"></hr>
             </Jumbotron>
         </nav>
     )
@@ -14,4 +14,3 @@ function Header(props) {
 
 export default Header
 
-// {props.jobTitle} in {props.location}
