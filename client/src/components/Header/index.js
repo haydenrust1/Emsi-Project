@@ -1,8 +1,9 @@
 import React from 'react'
+import API from '../../utilities/API'
 
-function Header() {
+function Header(props) {
     return(
-        <h1>Header</h1>
+        <nav>Header</nav>
     )
 }
 

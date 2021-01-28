@@ -5,5 +5,7 @@ export default {
     //     let responseData = await axios.get("/api/jobs");
     //     return responseData;
     // }
-    getJobData: () => axios.get("/api/jobs")
+    getJobData: function() {
+        return axios.get("/api/jobs")
+    }
 }

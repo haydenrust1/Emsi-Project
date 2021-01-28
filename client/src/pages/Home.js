@@ -5,16 +5,22 @@ function Home() {
     const [data, setData] = useState();
 
     useEffect(() => {
+        loadData();
+    }, [])
+
+    function loadData() {
         API.getJobData()
         .then(res => {
-            console.log(res);
-            // setData(res);
+            console.log(res.data);
+            setData(res.data);
         })
         .catch(error => console.log(error))
-    })
+    }
 
     return(
+        <>
         <h1>hello!</h1>
+        </>
     )
 }
 
