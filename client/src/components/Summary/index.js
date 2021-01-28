@@ -5,7 +5,7 @@ function Summary({summary}) {
     return(
         <div className='row'>
             <div className='col'>
-                <h2>Occupation Summary for{summary.occupation.title}</h2>
+                <h2>Occupation Summary for {summary.occupation.title}</h2>
             </div>
         </div>
 

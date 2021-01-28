@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export default {
     getJobData: async function() {
-        let responseData = await axios.get("/api/jobs");
-        return responseData;
+        return await axios.get("/api/jobs");
+        
     }
     // getJobData: function() {
     //     return axios.get("/api/jobs")

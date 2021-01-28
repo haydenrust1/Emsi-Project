@@ -1,8 +1,9 @@
 import React from 'react'
 import './style.css'
 
-function JobAmount({amount}) {
-    let growthSummary = Math.round(((amount.summary.jobs.regional - amount.summary.jobs.national_avg) / amount.summary.jobs.national_avg) * 100);
+ const JobAmount = ({amount}) => {
+        let growthSummary = Math.round(((amount.summary.jobs.regional - amount.summary.jobs.national_avg) / amount.summary.jobs.national_avg) * 100);
+
 
     return(
         <div className='row'>
@@ -21,8 +22,8 @@ function JobAmount({amount}) {
         </div>
         {/* job growth */}
         <div className='col'>
-            <h2>{amount.summary.jobs_growth}%</h2>
-            <p>% change {amount.summary.jobs_growth.start_year} - {amount.summary.jobs_growth.end_year}</p>
+            <h2>{amount.summary.jobs_growth.regional}%</h2>
+            <p>{`% change from ${amount.summary.jobs_growth.start_year} to ${amount.summary.jobs_growth.end_year}`}</p>
             <p>Nation: {amount.summary.jobs_growth.national_avg}</p>
         </div>
         {/* job wage */}
