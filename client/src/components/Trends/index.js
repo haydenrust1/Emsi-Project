@@ -4,7 +4,7 @@ import Chart from 'chart.js';
 
 
 function Trends({ trends }) {
-    const [arrayOfYears, setarrayOfYears] = useState([]);
+    const [arrayOfYears, setarrayOfYears] = useState();
 
     useEffect(() => {
         yearArrGenerator();
@@ -23,21 +23,18 @@ function Trends({ trends }) {
                         fill: false,
                         borderColor: 'rgb(100, 200, 9)',
                         data: jobPercentChanger(trends.trend_comparison.regional)
-                        // [0, ...trends.trend_comparison.regional]
                     },
                     {
                         label: 'State',
                         fill: false,
                         borderColor: 'rgb(1, 99, 132)',
                         data: jobPercentChanger(trends.trend_comparison.state)
-                        // [0, ...trends.trend_comparison.state]
                     },
                     {
                         label: 'Nation',
                         fill: false,
                         borderColor: 'rgb(200, 58, 3)',
                         data: jobPercentChanger(trends.trend_comparison.nation)
-                        // [0, ...trends.trend_comparison.nation]
                     },
                 ]
             },
@@ -88,11 +85,8 @@ function Trends({ trends }) {
         let array = [];
 
         for (var i = 0; i < arr.length - 1; i++) {
-
             let current = arr[i];
             let next = arr[i + 1];
-            console.log(current);
-            console.log(next);
 
             if (current < next) {
                 array.push(((next - current) / current) * 100);
