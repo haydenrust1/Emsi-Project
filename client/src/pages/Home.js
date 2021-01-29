@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import API from '../utilities/API'
-import axios from 'axios'
 import Title from '../components/Title'
 import Summary from '../components/Summary'
 import JobAmount from '../components/JobAmount';
 import Trends from '../components/Trends';
-import IndustryDesire from '../components/employedInfo';
+import IndustryDesire from '../components/IndustryInfo';
 
 function Home() {
     const [data, setData] = useState();
@@ -16,22 +15,11 @@ function Home() {
 
     const loadData = async () => {
         let jobData = await API.getJobData()
-        // let jobData = await axios.get('https://run.mocky.io/v3/a2cc3707-8691-4188-8413-6183a7bb3d32')
-        console.log(jobData.data);
         await setData(jobData.data);
     }
 
-    /*Synchronous api call */
-    // function loadData() {
-    //     API.getJobData()
-    //     .then(res => {
-    //         console.log(res.data);
-    //         setData(res.data);
-    //     })          
-    //     .catch(err => console.log(err))
-    // }
-
     return (
+        // Ternary operators allow api data to be passed before react app renders screen
         <div className='container'>
             {/*Title */}
             {
@@ -61,8 +49,7 @@ function Home() {
                     :
                     <p>loading</p>
             }
-
-            {/* employedInfo: Industries employing occupation */}
+            {/* IndustryInfo: Industries employing occupation */}
             {
                 data ?
                     <IndustryDesire info={data} />

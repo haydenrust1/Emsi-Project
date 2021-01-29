@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import Chart from 'chart.js';
 
 
 function Trends({ trends }) {
-    /*
-    *1.convert date labels into dynamic data
-    *2.convert data into percent change over each year given from array
-    */
+    const [arrayOfYears, setarrayOfYears] = useState([]);
 
     useEffect(() => {
+        yearArrGenerator();
 
         const ctx = 'myChart';
         const myChart = new Chart(ctx, {
@@ -18,25 +16,28 @@ function Trends({ trends }) {
 
             // The data for our dataset
             data: {
-                labels: ['2013', '2014', '2015', '2016', '2017', '2018'],
+                labels: arrayOfYears,
                 datasets: [
                     {
                         label: 'Region',
-                        // backgroundColor: 'rgb(255, 99, 132)',
-                        borderColor: 'rgb(255, 99, 132)',
-                        data: [0, ...trends.trend_comparison.regional]
+                        fill: false,
+                        borderColor: 'rgb(100, 200, 9)',
+                        data: jobPercentChanger(trends.trend_comparison.regional)
+                        // [0, ...trends.trend_comparison.regional]
                     },
                     {
                         label: 'State',
-                        // backgroundColor: 'rgb(1, 99, 132)',
+                        fill: false,
                         borderColor: 'rgb(1, 99, 132)',
-                        data: [0, ...trends.trend_comparison.state]
+                        data: jobPercentChanger(trends.trend_comparison.state)
+                        // [0, ...trends.trend_comparison.state]
                     },
                     {
                         label: 'Nation',
-                        // backgroundColor: 'rgb(200, 58, 3)',
+                        fill: false,
                         borderColor: 'rgb(200, 58, 3)',
-                        data: [0, ...trends.trend_comparison.nation]
+                        data: jobPercentChanger(trends.trend_comparison.nation)
+                        // [0, ...trends.trend_comparison.nation]
                     },
                 ]
             },
@@ -47,6 +48,10 @@ function Trends({ trends }) {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Percent Changed'
                         }
                     }]
                 },
@@ -60,7 +65,44 @@ function Trends({ trends }) {
                 }
             }
         });
-    });
+    }, []);
+
+    // creates dynamic array of years 
+    const yearArrGenerator = () => {
+        let yearsArray = [];
+        let frontArr = trends.trend_comparison.start_year;
+        let endArr = trends.trend_comparison.end_year;
+
+        while (frontArr < endArr) {
+            if (yearsArray.length === 0) {
+                yearsArray.push(frontArr)
+            }
+            yearsArray.push(frontArr += 1)
+        }
+
+        setarrayOfYears(yearsArray);
+    }
+
+    // creates dynamic array of job percent change
+    const jobPercentChanger = (arr) => {
+        let array = [];
+
+        for (var i = 0; i < arr.length - 1; i++) {
+
+            let current = arr[i];
+            let next = arr[i + 1];
+            console.log(current);
+            console.log(next);
+
+            if (current < next) {
+                array.push(((next - current) / current) * 100);
+            } else if (current > next) {
+                array.push(((current - next) / current) * 100);
+            }
+        }
+        // console.log(array);
+        return array;
+    }
 
     //array of years for regional, state, and nation
     let regionalArray = trends.trend_comparison.regional;
@@ -88,7 +130,7 @@ function Trends({ trends }) {
                     <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
             </div>
-            <table className="table">
+            <table className="table trendTable">
                 <thead>
                     <tr>
                         <th scope="col">Location</th>
