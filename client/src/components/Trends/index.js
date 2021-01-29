@@ -4,11 +4,8 @@ import Chart from 'chart.js';
 
 
 function Trends({ trends }) {
-    const [arrayOfYears, setarrayOfYears] = useState();
 
     useEffect(() => {
-        yearArrGenerator();
-
         const ctx = 'myChart';
         const myChart = new Chart(ctx, {
             // The type of chart we want to create
@@ -16,7 +13,7 @@ function Trends({ trends }) {
 
             // The data for our dataset
             data: {
-                labels: arrayOfYears,
+                labels: yearArrGenerator(),
                 datasets: [
                     {
                         label: 'Region',
@@ -77,7 +74,8 @@ function Trends({ trends }) {
             yearsArray.push(frontArr += 1)
         }
 
-        setarrayOfYears(yearsArray);
+        return yearsArray;
+
     }
 
     // creates dynamic array of job percent change
